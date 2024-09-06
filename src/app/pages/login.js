@@ -11,7 +11,7 @@ const Login = () => {
         e.preventDefault();
         setError('');
         try {
-            const response = await axios.post('/api/users/login', { email, password });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, { email, password });
             Cookies.set('token', response.data.token);
             window.location.href = '/profile'; // Redirect to profile page on successful login
         } catch (err) {

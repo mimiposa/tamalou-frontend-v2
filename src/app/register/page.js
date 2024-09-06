@@ -15,7 +15,8 @@ const Register = () => {
         setError('');
         setSuccess('');
         try {
-            const response = await axios.post('/api/users/register', { name, email, password });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, { name, email, password });
+            console.log(response.status)
             setSuccess('Registration successful! You can now log in.');
         } catch (err) {
             setError(err.response?.data?.error || 'Registration failed.');

@@ -12,7 +12,7 @@ const Recipes = () => {
         const fetchRecipes = async () => {
             try {
                 const token = Cookies.get('token');
-                const response = await axios.get('/api/recipes/recipes', {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recipes/recipes`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setRecipes(response.data);
@@ -27,7 +27,7 @@ const Recipes = () => {
     const handleDelete = async (id) => {
         try {
             const token = Cookies.get('token');
-            await axios.delete(`/api/recipes/delete/${id}`, {
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/recipes/delete/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setRecipes(recipes.filter((recipe) => recipe.id !== id));
