@@ -1,44 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { useAuth } from '@/context/AuthContext';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Profile = () => {
-    const [user, setUser] = useState(null);
-    const [error, setError] = useState('');
+    const { user, loading } = useAuth();
+    const router = useRouter();
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const token = Cookies.get('token');
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setUser(response.data);
-            } catch (err) {
-                setError(err.response?.data?.error || 'Failed to fetch profile.');
-            }
-        };
+        if (!loading && !user) {
+            router.push('/login'); // Redirect to login if not logged in
+        }
+    }, [user, loading, router]);
 
-        fetchUserProfile();
-    }, []);
-
-    if (error) {
-        return <p style={{ color: 'red' }}>{error}</p>;
+    if (loading) {
+        return <p>Loading...</p>; // Show a loading message while checking auth state
     }
 
-    if (!user) {
-        return <p>Loading...</p>;
-    }
-
-    return (
-        <div>
-            <h1>Welcome, {user.message}</h1>
-            <p>Email: {user.email}</p>
-            {/* Additional user info can be displayed here */}
+    return user ? (
+        <div className="flex flex-col items-center justify-center min-h-screen-layout bg-gray-100">
+            <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+                <h1 className="text-2xl font-bold mb-6 text-center">
+                    Welcome, {user.name ? user.name : user.email} !
+                </h1>
+                {/* Display additional user details or actions */}
+            </div>
         </div>
-    );
+    ) : null;
 };
 
 export default Profile;

@@ -1,30 +1,30 @@
 'use client';
 
 import { useState } from 'react';
-import axios from 'axios';
+import { useAuth } from '@/context/AuthContext';
 
 const Register = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const [error, setError] = useState('');
+const [success, setSuccess] = useState('');
+const { register } = useAuth();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, { name, email, password });
-            console.log(response.status)
+            await register(name, email, password);
             setSuccess('Registration successful! You can now log in.');
         } catch (err) {
-            setError(err.response?.data?.error || 'Registration failed.');
+            setError('Registration failed. Please try again.');
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen-layout bg-gray-100">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold mb-6 text-center">Create Your Account</h1>
                 <form onSubmit={handleRegister} className="space-y-4">
@@ -67,3 +67,4 @@ const Register = () => {
 };
 
 export default Register;
+

@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Properties for Fonts */
+:root {
+  --font-geist-sans: 'Geist Sans', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+  --foreground: #333333;
+  --background: #f8f8f8;
+}
+
 /* Reset some default browser styles */
 * {
   margin: 0;
@@ -54,4 +62,8 @@ footer {
   position: relative;
   bottom: 0;
   width: 100%;
+}
+
+.min-h-screen-layout {
+  min-height : calc(100vh - 200px);
 }
