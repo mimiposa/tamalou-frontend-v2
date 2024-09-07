@@ -1,6 +1,6 @@
 import localFont from 'next/font/local';
 import './globals.css';
-import { AuthProvider } from '@/context/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
 import NavLinks from "@/components/NavLinks";
 
 // Load custom fonts

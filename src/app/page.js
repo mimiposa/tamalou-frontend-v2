@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext'; // Import AuthContext to get the user's auth state
+import { useAuth } from '../context/AuthContext'; // Import AuthContext to get the user's auth state
 
 export default function Home() {
     const { user } = useAuth(); // Get the user state from AuthContext
