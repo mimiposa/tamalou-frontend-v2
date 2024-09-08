@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import the useRouter hook
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -9,6 +10,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); // User state to manage login/logout
     const [loading, setLoading] = useState(true); // Loading state to handle auth check
+    const router = useRouter(); // Initialize the router
 
     useEffect(() => {
         // Check for an active session on initial load
@@ -45,6 +47,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         Cookies.remove('token');
         setUser(null);
+        router.push('/login'); // Redirect to the login page after logout
     };
 
     const register = async (name, email, password) => {

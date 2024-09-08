@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import the useRouter hook
 import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
-const [name, setName] = useState('');
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [error, setError] = useState('');
-const [success, setSuccess] = useState('');
-const { register } = useAuth();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const { register } = useAuth();
+    const router = useRouter(); // Initialize the router
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -17,7 +19,12 @@ const { register } = useAuth();
         setSuccess('');
         try {
             await register(name, email, password);
-            setSuccess('Registration successful! You can now log in.');
+            setSuccess('Registration successful! Redirecting to homepage...');
+
+            // Redirect to the homepage after a brief delay to show the success message
+            setTimeout(() => {
+                router.push('/'); // Redirect to the homepage
+            }, 2000); // 2-second delay before redirecting
         } catch (err) {
             setError('Registration failed. Please try again.');
         }
@@ -67,4 +74,3 @@ const { register } = useAuth();
 };
 
 export default Register;
-

@@ -27,8 +27,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
             <header className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
                 <nav className="flex gap-6">
-                    <a href="/" className="text-lg font-semibold text-gray-700 hover:text-blue-500">Home</a>
-                    <a href="/recipes" className="text-lg font-semibold text-gray-700 hover:text-blue-500">Recipes</a>
+
                     <NavLinks /> {/* Updated dynamic navigation links */}
                 </nav>
             </header>

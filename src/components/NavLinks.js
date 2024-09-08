@@ -8,6 +8,17 @@ const NavLinks = () => {
 
     return (
         <>
+            <Link href="/" className="text-lg font-semibold text-gray-700 hover:text-blue-500">
+                Home
+            </Link>
+            <Link href="/recipes" className="text-lg font-semibold text-gray-700 hover:text-blue-500">
+                Recipes
+            </Link>
+            {user && (
+                <Link href="/recipes/create" className="text-lg font-semibold text-gray-700 hover:text-blue-500">
+                    Create Recipe
+                </Link>
+            )}
             {!user ? (
                 <>
                     <Link href="/login" className="text-lg font-semibold text-gray-700 hover:text-blue-500">
