@@ -16,7 +16,7 @@ const NavLinks = () => {
             </Link>
             {user && (
                 <Link href="/recipes/create" className="text-lg font-semibold text-gray-700 hover:text-blue-500">
-                    Create Recipe
+                    Tamalou
                 </Link>
             )}
             {!user ? (

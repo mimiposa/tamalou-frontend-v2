@@ -64,6 +64,10 @@ footer {
   width: 100%;
 }
 
+.instruction  ul {
+  margin: 20px 0;
+}
+
 .min-h-screen-layout {
   min-height : calc(100vh - 200px);
 }
