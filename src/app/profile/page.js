@@ -19,10 +19,10 @@ const Profile = () => {
     }
 
     return user ? (
-        <div className="flex flex-col items-center justify-center min-h-screen-layout bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen-layout">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold mb-6 text-center">
-                    Welcome, {user.name ? user.name : user.email} !
+                    Welcome {user.name ? user.name : user.email} !
                 </h1>
                 {/* Display additional user details or actions */}
             </div>

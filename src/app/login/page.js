@@ -21,16 +21,16 @@ const Login = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen-layout bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen-layout">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold mb-6 text-center">Welcome Back!</h1>
+                <h1 className="text-2xl font-bold mb-6 text-center">Welcome!</h1>
                 <form onSubmit={handleLogin} className="space-y-4">
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
                         required
                     />
                     <input
@@ -38,12 +38,12 @@ const Login = () => {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
                         required
                     />
                     <button
                         type="submit"
-                        className="w-full bg-green-500 text-white py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200"
+                        className="w-full bg-gray-200 text-black  px-6 py-2 rounded-full shadow-md border-2 hover:text-white hover:bg-black transition duration-200"
                     >
                         Login
                     </button>

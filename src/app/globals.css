@@ -32,7 +32,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 header {
@@ -50,8 +50,9 @@ nav a {
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem;
   min-height: calc(100vh - 120px); /* Adjust based on the header and footer height */
+  background: #fff;
 }
 
 footer {
@@ -71,3 +72,4 @@ footer {
 .min-h-screen-layout {
   min-height : calc(100vh - 200px);
 }
+
