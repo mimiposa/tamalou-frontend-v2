@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
+import DOMPurify from 'dompurify'; //Against Cross-Site Scripting (XSS)
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ const Login = () => {
                         type="email"
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(DOMPurify.sanitize(e.target.value))}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
                         required
                     />
@@ -37,7 +38,7 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(DOMPurify.sanitize(e.target.value))}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
                         required
                     />

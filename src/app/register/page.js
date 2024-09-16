@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import the useRouter hook
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
+import DOMPurify from "dompurify"; //Against Cross-Site Scripting (XSS)
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -39,7 +40,7 @@ const Register = () => {
                         type="text"
                         placeholder="Name"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setName(DOMPurify.sanitize(e.target.value))}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         required
                     />
@@ -47,7 +48,7 @@ const Register = () => {
                         type="email"
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(DOMPurify.sanitize(e.target.value))}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         required
                     />
@@ -55,7 +56,7 @@ const Register = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(DOMPurify.sanitize(e.target.value))}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         required
                     />

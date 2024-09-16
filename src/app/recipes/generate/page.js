@@ -1,12 +1,13 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 import axios from 'axios';
 import Cookies from "js-cookie";
 import NavLinks from "@/components/NavLinks";
 import logo from '../../assets/tamalou-logo.png';
 import Image from "next/image";
+import DOMPurify from "dompurify"; //Against Cross-Site Scripting (XSS)
 
 const CreateRecipe = () => {
     const [symptoms, setSymptoms] = useState('');
@@ -184,7 +185,7 @@ const CreateRecipe = () => {
                         type="text"
                         placeholder="Enter symptoms or preferences"
                         value={symptoms}
-                        onChange={(e) => setSymptoms(e.target.value)}
+                        onChange={(e) => setSymptoms(DOMPurify.sanitize(e.target.value))}
                         className="flex-grow p-3 border-none rounded-full focus:outline-none bg-transparent"
                         required
                     />
