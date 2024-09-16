@@ -15,6 +15,11 @@ const Sidebar = () => {
         setIsSidebarOpen((prevState) => !prevState);
     };
 
+    const closeSidebar = () => {
+        // Close sidebar
+        setIsSidebarOpen(false);
+    };
+
     // Handle click outside to close sidebar
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -25,18 +30,14 @@ const Sidebar = () => {
                 burgerRef.current &&
                 !burgerRef.current.contains(event.target)
             ) {
-                setIsSidebarOpen(false);
+                closeSidebar();
             }
         };
 
-        // Add or remove the event listener based on sidebar state
-        if (isSidebarOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
+        // Add event listener
+        document.addEventListener('mousedown', handleClickOutside);
 
-        // Cleanup event listener on component unmount or state change
+        // Cleanup event listener on component unmount
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -64,7 +65,8 @@ const Sidebar = () => {
                 <div className="flex flex-col h-full">
                     <h2 className="hidden md:block text-xl font-bold mb-6">Menu</h2>
                     <nav className="flex-1 space-y-2 pt-12 md:pt-0">
-                        <SideLinks />
+                        {/* Pass closeSidebar function to SideLinks to close sidebar on link click */}
+                        <SideLinks closeSidebar={closeSidebar} />
                     </nav>
                 </div>
             </aside>
