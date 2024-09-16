@@ -18,6 +18,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   font-family: var(--font-geist-sans), sans-serif;
   background-color: #f8f9fa;
@@ -35,14 +39,6 @@ a:hover {
   text-decoration: none;
 }
 
-header {
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 nav a {
   margin-right: 1rem;
@@ -51,8 +47,8 @@ nav a {
 
 main {
   padding: 1rem;
-  min-height: calc(100vh - 120px); /* Adjust based on the header and footer height */
   background: #fff;
+  width: 100%;
 }
 
 footer {
@@ -73,3 +69,33 @@ footer {
   min-height : calc(100vh - 200px);
 }
 
+.container {
+  padding: 1rem;
+  margin: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px; /* For small screens (like tablets) */
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px; /* For medium screens (like small laptops) */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px; /* For large screens (like desktops) */
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px; /* For extra-large screens */
+  }
+}

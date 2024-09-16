@@ -3,6 +3,7 @@
 import { useAuth } from '../../context/AuthContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import NavLinks from "@/components/NavLinks";
 
 const Profile = () => {
     const { user, loading } = useAuth();
@@ -19,14 +20,21 @@ const Profile = () => {
     }
 
     return user ? (
-        <div className="flex flex-col items-center justify-center min-h-screen-layout">
-            <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold mb-6 text-center">
-                    Welcome {user.name ? user.name : user.email} !
-                </h1>
-                {/* Display additional user details or actions */}
+        <>
+            <header className="w-full">
+                <nav className="w-full flex justify-end items-end">
+                    <NavLinks/> {/* Updated dynamic navigation links */}
+                </nav>
+            </header>
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <div className="w-full max-w-md p-8 bg-white rounded-lg md:shadow-lg">
+                    <h1 className="text-2xl font-bold mb-6 text-center">
+                        Welcome {user.name ? user.name : user.email} !
+                    </h1>
+                    {/* Display additional user details or actions */}
+                </div>
             </div>
-        </div>
+        </>
     ) : null;
 };
 

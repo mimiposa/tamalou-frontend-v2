@@ -1,7 +1,10 @@
+// src/app/layout.js
+
 import localFont from 'next/font/local';
 import './globals.css';
 import { AuthProvider } from '../context/AuthContext';
 import NavLinks from "@/components/NavLinks";
+import Sidebar from "@/components/Sidebar"; // Import the new Sidebar component
 
 // Load custom fonts
 const geistSans = localFont({
@@ -23,18 +26,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-        <body className={`min-h-screen-layout ${geistSans.variable} ${geistMono.variable}`}>
+        <body className={`min-h-screen-layout bg-white flex h-screen overflow-y-auto scroll-auto md:overflow-y-hidden ${geistSans.variable} ${geistMono.variable}`}>
         <AuthProvider>
-            <header className="bg-white shadow-md py-4 px-8 flex justify-between items-center border-b border-gray-200">
-                <nav className="flex gap-6">
 
-                    <NavLinks /> {/* Updated dynamic navigation links */}
-                </nav>
-            </header>
-            <main className="">{children}</main>
-            <footer className="bg-white py-4 px-8 text-center border-t border-gray-200">
-                <p className="text-gray-500">&copy; 2024 Tamalou. All rights reserved.</p>
-            </footer>
+            {/* Sidebar Component (Client Component) */}
+            <Sidebar />
+
+            {/* Main Content */}
+            <main className="flex-1 md:p-4">
+                {children}
+            </main>
+
         </AuthProvider>
         </body>
         </html>

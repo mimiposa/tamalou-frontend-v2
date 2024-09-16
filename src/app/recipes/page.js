@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import NavLinks from "@/components/NavLinks";
 
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
@@ -37,19 +38,26 @@ const Recipes = () => {
     };
 
     return (
-        <div>
-            <h1>Your Recipes</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <ul>
-                {recipes.map((recipe) => (
-                    <li key={recipe.id}>
-                        <h2>{recipe.title}</h2>
-                        <p>{recipe.ingredients}</p>
-                        <button onClick={() => handleDelete(recipe.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <header className="w-full">
+                <nav className="w-full flex justify-end items-end">
+                    <NavLinks/> {/* Updated dynamic navigation links */}
+                </nav>
+            </header>
+            <div>
+                <h1>Your Recipes</h1>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <ul>
+                    {recipes.map((recipe) => (
+                        <li key={recipe.id}>
+                            <h2>{recipe.title}</h2>
+                            <p>{recipe.ingredients}</p>
+                            <button onClick={() => handleDelete(recipe.id)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
     );
 };
 
