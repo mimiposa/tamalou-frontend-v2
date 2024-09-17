@@ -28,6 +28,12 @@ const SideLinks = ({ closeSidebar }) => {
                     </Link>
                 </>
             )}
+            {user && user.role === 'admin' && (
+                <Link href="/admin" className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
+                    <span className="ml-3">Admin Panel</span>
+                </Link>
+            )}
+
         </>
     );
 };

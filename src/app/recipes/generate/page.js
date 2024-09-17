@@ -30,6 +30,9 @@ const CreateRecipe = () => {
 
         if (!user || !token) {
             setError('You must be logged in to generate a recipe.');
+            Cookies.remove('token');
+            setUser(null);
+            router.push('/login'); // Redirect to the login page
             return;
         }
 
@@ -161,14 +164,17 @@ const CreateRecipe = () => {
                             <p className="text-sm font-medium text-gray-800">J&rsquo;ai mal à la tête</p>
                         </button>
                         <button
+                            onClick={() => handleGenerateRecipeOnClick("Je fais de l'ecxema")}
                             className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition">
                             <p className="text-sm font-medium text-gray-800">Je fais de l&rsquo;ecxema</p>
                         </button>
                         <button
+                            onClick={() => handleGenerateRecipeOnClick("je souffre d'arthrose")}
                             className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition">
                             <p className="text-sm font-medium text-gray-800">je souffre d&rsquo;arthrose</p>
                         </button>
                         <button
+                            onClick={() => handleGenerateRecipeOnClick("J'ai des boutons d'acné")}
                             className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition">
                             <p className="text-sm font-medium text-gray-800">J&rsquo;ai des boutons d&rsquo;acné</p>
                         </button>
@@ -179,8 +185,8 @@ const CreateRecipe = () => {
 
 
             {/* search Form Section */}
-            <div className="w-full max-w-3xl rounded-lg sticky bottom-0 border-gray-50">
-                <form onSubmit={handleGenerateRecipe} className="flex items-center bg-gray-200 rounded-full shadow-md md:mb-8">
+            <div className="w-full max-w-3xl rounded-lg sticky mb-8 border-gray-50">
+                <form onSubmit={handleGenerateRecipe} className="flex items-center bg-gray-200 rounded-full shadow-md">
                     <input
                         type="text"
                         placeholder="Enter symptoms or preferences"

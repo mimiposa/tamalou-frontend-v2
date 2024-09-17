@@ -50,9 +50,9 @@ export const AuthProvider = ({ children }) => {
         router.push('/login'); // Redirect to the login page after logout
     };
 
-    const register = async (name, email, password) => {
+    const register = async (name, email, password, role) => {
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, { name, email, password });
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, { name, email, password, role });
         } catch (err) {
             console.error('Registration error', err);
             throw err;
