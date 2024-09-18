@@ -126,7 +126,7 @@ const CreateRecipe = () => {
             {recipe ? (
                 <div className="w-full max-w-3xl md:p-6 bg-white rounded-lg mb-4">
                     {/* Generated Recipe Section */}
-                    <h2 className="text-xl font-semibold mb-2">{recipe.name}</h2>
+                    <h2 className="text-xl font-semibold mb-2 capitalize">{recipe.name}</h2>
                     <p className="mb-2"><strong>Ingredients:</strong></p>
                     <ul className="list-disc list-inside mb-4">
                         {recipe.ingredients.map((ingredient, index) => (
@@ -164,9 +164,9 @@ const CreateRecipe = () => {
                             <p className="text-sm font-medium text-gray-800">J&rsquo;ai mal à la tête</p>
                         </button>
                         <button
-                            onClick={() => handleGenerateRecipeOnClick("Je fais de l'ecxema")}
+                            onClick={() => handleGenerateRecipeOnClick("Je fais de l'eczéma")}
                             className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition">
-                            <p className="text-sm font-medium text-gray-800">Je fais de l&rsquo;ecxema</p>
+                            <p className="text-sm font-medium text-gray-800">Je fais de l&rsquo;eczéma</p>
                         </button>
                         <button
                             onClick={() => handleGenerateRecipeOnClick("je souffre d'arthrose")}
