@@ -12,9 +12,9 @@ const AdminPanel = () => {
     const [newRecipe, setNewRecipe] = useState({
         category: '',
         name: '',
-        keywords: '',
-        ingredients: '',
-        instructions: '',
+        keywords: [],
+        ingredients: [],
+        instructions: [],
         warningMessage: '',
     });
     const [error, setError] = useState('');

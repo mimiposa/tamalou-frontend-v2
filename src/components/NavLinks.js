@@ -1,14 +1,12 @@
 'use client';
 
-import { useAuth } from '../context/AuthContext';
-import Link from 'next/link';
-import Cookies from "js-cookie";
+import { useAuth } from '@/context/AuthContext';
 import {useState} from "react";
 import Image from "next/image";
 import person from '../app/assets/person-profil.png';
 
 const NavLinks = () => {
-    const { user, logout } = useAuth();
+    const { logout } = useAuth();
     const [open, setOpen] = useState(false);
 
     const openDropDown = () => {
@@ -24,19 +22,19 @@ const NavLinks = () => {
                 <div id="profile-menu"
                      className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
                     <div onClick={logout}
-                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100`}>
+                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
                         Mon abonnement
                     </div>
                     <div onClick={logout}
-                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100`}>
+                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
                         Mes recettes
                     </div>
                     <div onClick={logout}
-                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100`}>
+                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
                         Paramètres
                     </div>
                     <div onClick={logout}
-                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100`}>
+                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
                         Logout
                     </div>
                 </div>
