@@ -24,7 +24,7 @@ export default function Home() {
                     <div className="flex flex-col items-center">
                         <p className="text-lg text-gray-700 mb-6">Welcome
                             back, {user.name ? user.name : user.email}!</p>
-                        <Link href="/profile"
+                        <Link href="/profile/details"
                               className="bg-black text-white px-6 py-2 rounded-full shadow-md hover:bg-opacity-95 transition duration-200">
                             Go to Profile
                         </Link>

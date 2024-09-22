@@ -59,8 +59,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const profile = () => {
+        router.push('/profile/details'); // Redirect to the profile details
+    };
+
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout, register }}>
+        <AuthContext.Provider value={{ user, loading, login, logout, register, profile }}>
             {children}
         </AuthContext.Provider>
     );

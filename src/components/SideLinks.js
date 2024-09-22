@@ -18,6 +18,7 @@ const SideLinks = ({ closeSidebar }) => {
             // Reset the state after clearing the recipe
             resetClearRecipe();
         }
+        console.log('user', user)
     }, [isClear, clearRecipe, resetClearRecipe]);
 
     const handleLinkClick = () => {

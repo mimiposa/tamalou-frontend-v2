@@ -6,7 +6,7 @@ import Image from "next/image";
 import person from '../app/assets/person-profil.png';
 
 const NavLinks = () => {
-    const { logout } = useAuth();
+    const { logout, profile } = useAuth();
     const [open, setOpen] = useState(false);
 
     const openDropDown = () => {
@@ -21,9 +21,9 @@ const NavLinks = () => {
             {open &&
                 <div id="profile-menu"
                      className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
-                    <div onClick={logout}
+                    <div onClick={profile}
                             className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
-                        Mon abonnement
+                        Mon profile
                     </div>
                     <div onClick={logout}
                             className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer`}>
