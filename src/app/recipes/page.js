@@ -10,16 +10,20 @@ const Recipes = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
+
         const fetchRecipes = async () => {
             try {
                 const token = Cookies.get('token');
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recipes/recipes`, {
+                const response = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/recipes/recipes`,
+                    {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setRecipes(response.data);
             } catch (err) {
                 setError(err.response?.data?.error || 'Failed to fetch recipes.');
             }
+
         };
 
         fetchRecipes();

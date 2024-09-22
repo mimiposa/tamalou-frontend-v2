@@ -2,9 +2,10 @@
 
 import localFont from 'next/font/local';
 import './globals.css';
-import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider } from '@/context/AuthContext';
 import Sidebar from "@/components/Sidebar";
 import ClientWrapper from "@/app/ClientWrapper";
+import {RecipeProvider} from "@/context/RecipeContext";
 
 // Load custom fonts
 const geistSans = localFont({
@@ -30,16 +31,16 @@ export default function RootLayout({ children }) {
 
             <body className={`bg-white flex overflow-y-auto scroll-auto ${geistSans.variable} ${geistMono.variable}`}>
                 <AuthProvider>
-
-                    <ClientWrapper>
+                        <ClientWrapper>
+                    <RecipeProvider> {/* Wrap the entire layout with RecipeProvider */}
                         {/* Sidebar Component (Client Component) */}
                         <Sidebar />
                         {/* Main Content */}
                         <main className="flex-1 md:p-4">
                             {children}
                         </main>
+                    </RecipeProvider>
                     </ClientWrapper>
-
                 </AuthProvider>
             </body>
 
