@@ -19,12 +19,11 @@ const ProfilePage = () => {
             try {
                 const response = await axios.get(
                     `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
-                    {},
                     {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                console.log("response.data.user", response.data.user)
-                setUserProfile(response.data.user);
+                console.log("user", user)
+                setUserProfile(user);
                 setLast5Recipes(response.data.recipes);
             } catch (error) {
                 console.error('Error fetching profile data:', error);
@@ -39,7 +38,7 @@ const ProfilePage = () => {
         // Logic for adding recipe
     };
 
-    return user && <>
+    return userProfile && <>
         <header className="w-full">
             <nav className="w-full flex justify-end items-end">
                 <NavLinks/> {/* Updated dynamic navigation links */}
@@ -63,7 +62,7 @@ const ProfilePage = () => {
                     <div className="mb-6">
                         <h3 className="text-xl font-semibold">Recently Generated Recipes</h3>
                         <ul className="list-disc list-inside mt-4">
-                            {last5Recipes.length > 0 ? last5Recipes.map(recipe => (
+                            {last5Recipes && last5Recipes.length > 0 ? last5Recipes.map(recipe => (
                                 <li key={recipe.id} className="mb-2">{recipe.name}</li>
                             )) : <p>No recent recipes</p>}
                         </ul>
