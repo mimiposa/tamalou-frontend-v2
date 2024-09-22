@@ -39,9 +39,6 @@ const SideLinks = ({ closeSidebar }) => {
             </Link>
             {user && (
                 <>
-                    <Link href="/recipes" onClick={handleLinkClick} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
-                        <span className="ml-3">Recipes</span>
-                    </Link>
                     <Link href="/recipes/generate" onClick={handleClearRecipe} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
                         <span className="ml-3">Tamalou</span>
                     </Link>
