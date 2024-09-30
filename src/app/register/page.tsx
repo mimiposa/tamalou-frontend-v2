@@ -1,25 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import the useRouter hook
-import { useAuth } from '@/context/AuthContext';
-import DOMPurify from "dompurify"; //Against Cross-Site Scripting (XSS)
+import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import DOMPurify from 'dompurify';
+import {AppDispatch, RootState} from '../../redux/store';
+import { register } from '../../redux/slices/authSlice';
+import {name} from "ts-interface-checker"; // Correctly import the async thunk
 
-const Register = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
-    const { register } = useAuth();
-    const router = useRouter(); // Initialize the router
+const Register: React.FC = () => {
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
+    const [success, setSuccess] = useState<string>('');
+    const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>(); // Correctly type dispatch for thunks
 
-    const handleRegister = async (e) => {
+    const { user, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
+
+    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
         setSuccess('');
+
         try {
-            await register(name, email, password);
+            // Dispatch the register thunk with the necessary arguments
+            await dispatch(register({name, email, password} ));
+
             setSuccess('Registration successful! Redirecting to homepage...');
 
             // Redirect to the homepage after a brief delay to show the success message
@@ -32,7 +40,7 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center justify-center min-h-dvh">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold mb-6 text-center">Create Your Account</h1>
                 <form onSubmit={handleRegister} className="space-y-4">
@@ -64,7 +72,7 @@ const Register = () => {
                         type="submit"
                         className="w-full bg-black text-white px-6 py-2 rounded-full shadow-md hover:bg-opacity-95 transition duration-200"
                     >
-                        Register
+                        {loading ? 'Registering...' : 'Register'}
                     </button>
                 </form>
                 {error && <p className="mt-4 text-red-500 text-center">{error}</p>}

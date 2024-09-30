@@ -6,5 +6,8 @@
   "skin_conditions": "Skin Conditions",
   "circulatory_problems": "Circulatory Problems",
   "respiratory_disorders": "Respiratory Disorders",
-  "neurological_disorders": "Neurological Disorders"
+  "neurological_disorders": "Neurological Disorders",
+  "profile_name": "Name",
+  "profile_email": "Email",
+  "profile_password": "Password"
 }

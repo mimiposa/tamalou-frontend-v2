@@ -6,5 +6,8 @@
   "skin_conditions": "Affections Cutanées",
   "circulatory_problems": "Problèmes Circulatoires",
   "respiratory_disorders": "Troubles Respiratoires",
-  "neurological_disorders": "Troubles Neurologiques"
+  "neurological_disorders": "Troubles Neurologiques",
+  "profile_name": "Name",
+  "profile_email": "Email",
+  "profile_password": "Password"
 }

@@ -46,7 +46,7 @@ nav a {
 }
 
 main {
-  padding: 1rem;
+  padding: 0 !important;
   background: #fff;
   width: 100%;
 }
@@ -63,10 +63,6 @@ footer {
 
 .instruction  ul {
   margin: 20px 0;
-}
-
-.min-h-screen-layout {
-  min-height : calc(100vh - 200px);
 }
 
 .container {
