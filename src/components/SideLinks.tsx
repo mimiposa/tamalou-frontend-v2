@@ -5,9 +5,12 @@ import { RootState } from '../redux/store';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { logout } from '../redux/slices/authSlice';
+import {checkUserSession, logout} from '../redux/slices/authSlice';
 import { clearRecipe, resetClearRecipe } from '../redux/slices/recipeSlice';
 import Cookies from "js-cookie";
+import {jwtDecode} from "jwt-decode";
+import {disconnectUser} from "../app/utils";
+
 
 // Define the types for props
 interface SideLinksProps {
@@ -17,17 +20,29 @@ interface SideLinksProps {
 const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const router = useRouter(); // Initialize router for navigation
-    const { user, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
+    const { user, retrievedUser, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
     const { isClear } = useSelector((state: RootState) => state.recipe); // Use Redux state for recipe
+
+    useEffect(() => {
+        dispatch(logout());
+        // @ts-ignore
+        dispatch(checkUserSession());
+    }, []);
+
 
     useEffect(() => {
         if (isClear) {
             // Reset the state after clearing the recipe
             dispatch(resetClearRecipe()); // Dispatch the resetClearRecipe action from Redux
-        }
-    }, [isClear, dispatch]);
 
-    const handleLinkClick = () => {
+        }
+        // @ts-ignore
+        dispatch(checkUserSession());
+    }, [isClear]);
+
+
+
+    const handleLinkClick = async () => {
         // Call closeSidebar to close the sidebar when a link is clicked
         closeSidebar();
     };
@@ -41,6 +56,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
 
     const token = Cookies.get('token');
     console.log("user", user)
+    console.log("retrievedUser", retrievedUser)
 
 
     return (
@@ -52,7 +68,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
             >
                 <span className="ml-3">Home</span>
             </Link>
-            {user && (
+            {retrievedUser && (
                 <>
                     <Link
                         href="/recipes/generate"
@@ -63,7 +79,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
                     </Link>
                 </>
             )}
-            {user && user.data?.role === 'admin' && (
+            {retrievedUser && retrievedUser.user.role === 'admin' && (
                 <Link
                     href="/admin"
                     className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400"

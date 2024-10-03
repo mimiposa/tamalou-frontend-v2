@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, FormEvent } from 'react';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -10,6 +10,8 @@ import DOMPurify from 'dompurify';
 import logo from '../../../../public/assets/tamalou-logo.png';
 import {RootState} from "../../../redux/store";
 import Homepage from "../../../components/homepage";
+import {disconnectUser} from "../../utils";
+import {logout} from "../../../redux/slices/authSlice";
 
 // Define types for recipe and user
 interface Recipe {
@@ -20,6 +22,7 @@ interface Recipe {
 }
 
 const CreateRecipe: React.FC = () => {
+    const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const [symptoms, setSymptoms] = useState('');
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [error, setError] = useState('');
@@ -29,6 +32,7 @@ const CreateRecipe: React.FC = () => {
 
 
     useEffect(() => {
+        dispatch(logout());
         setRecipe(null);
     }, [isClear]);
 
@@ -134,10 +138,10 @@ const CreateRecipe: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center md:overflow-y-hidden justify-end min-h-dvh">
-            {user ? (
+        <div className="flex flex-col items-center md:overflow-y-hidden justify-end min-h-dvh p-10">
+            {user &&
                 <main className="h-dvh flex-1 md:p-6 md:overflow-y-hidden flex flex-col items-center justify-between">
-                    {recipe ? (
+                    {recipe ?
                         <div className="w-full max-w-3xl md:p-6 bg-white rounded-lg mb-4 flex flex-grow flex-col items-start justify-center">
                             {/* Generated Recipe Section */}
                             <h2 className="text-xl font-semibold mb-2 capitalize">{recipe.name}</h2>
@@ -165,7 +169,7 @@ const CreateRecipe: React.FC = () => {
                                 Save Recipe
                             </button>
                         </div>
-                    ) : (
+                        :
                         <div className="w-full text-center flex flex-grow flex-col items-center justify-center">
                             {/* Suggestions Section */}
                             <div className="mb-6">
@@ -207,8 +211,7 @@ const CreateRecipe: React.FC = () => {
                                 </button>
                             </div>
                         </div>
-                    )}
-
+                    }
                     {/* Search Form Section */}
                     <div className="w-full max-w-3xl rounded-lg sticky mb-8 border-gray-50">
                         <form onSubmit={handleGenerateRecipe} className="flex items-center bg-gray-200 rounded-full shadow-md">
@@ -243,9 +246,7 @@ const CreateRecipe: React.FC = () => {
                         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
                     </div>
                 </main>
-            ) : (
-                <Homepage />
-            )}
+            }
         </div>
     );
 };

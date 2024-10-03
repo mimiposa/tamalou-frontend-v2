@@ -3,10 +3,11 @@
 import {useState, useEffect, FormEvent, ChangeEvent} from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {UserData} from "../../redux/slices/authSlice";
+import {logout, UserData} from "../../redux/slices/authSlice";
 import {t} from "i18next";
+import {disconnectUser} from "../utils";
 
 interface Recipe {
     id: string;
@@ -17,6 +18,7 @@ interface Recipe {
 
 
 const ProfilePage: React.FC = () => {
+    const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -52,6 +54,7 @@ const ProfilePage: React.FC = () => {
     const token = Cookies.get('token');
 
     useEffect(() => {
+        dispatch(logout());
         setClientReady(true); // Ensures client-side rendering
     }, []);
 
@@ -93,8 +96,8 @@ const ProfilePage: React.FC = () => {
 
     return user && (
         <>
-            <div className="">
-                <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg">
+            <div className="p-10">
+                <div className="mx-auto p-6 bg-white rounded-lg">
                     {/* Account Section */}
                     {/*<section className="mb-8">
                         <h2 className="text-xl font-semibold text-gray-800">Account</h2>

@@ -3,6 +3,9 @@
 import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {disconnectUser} from "../../utils";
+import {logout} from "../../../redux/slices/authSlice";
+import {useDispatch} from "react-redux";
 
 // Define types for recipe and user profile
 interface Recipe {
@@ -19,6 +22,7 @@ interface UserProfile {
 }
 
 const ProfilePage: React.FC = () => {
+    const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
     const [last5Recipes, setLast5Recipes] = useState<Recipe[]>([]);
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: 0, name: '', ingredients: '', notes: '' });
@@ -42,6 +46,7 @@ const ProfilePage: React.FC = () => {
                 }
             }
         };
+        dispatch(logout());
         fetchData();
     }, []);
 
@@ -52,7 +57,7 @@ const ProfilePage: React.FC = () => {
     };
 
     return userProfile ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center p-10">
             <div className="w-full max-w-md bg-white rounded-lg p-6">
                 {/* Recently Generated Recipes */}
                 <div className="mb-6">

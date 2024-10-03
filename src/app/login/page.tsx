@@ -7,6 +7,7 @@ import {checkUserSession, login} from '../../redux/slices/authSlice'; // Import 
 import {AppDispatch, RootState} from '../../redux/store';
 import Homepage from '../../components/homepage';
 import Cookies from "js-cookie";
+import {disconnectUser} from "../utils";
 
 const Login: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +33,8 @@ const Login: React.FC = () => {
 
         try {
             await dispatch(login({email, password}));
+            await dispatch(checkUserSession());
+
 
         } catch (err) {
             setError('Login failed. Please check your credentials.');
@@ -43,7 +46,7 @@ const Login: React.FC = () => {
         <>
             {clientReady && user ?
                 <Homepage/> :
-                <div className="flex flex-col items-center justify-center md:p-8 min-h-dvh">
+                <div className="flex flex-col items-center justify-center md:p-8 min-h-dvh p-10">
                     <div className="w-full max-w-md p-8 bg-white rounded-lg md:shadow-lg">
                         <h1 className="text-2xl font-bold mb-6 text-center">Welcome!</h1>
                         <form onSubmit={handleLogin} className="space-y-4">

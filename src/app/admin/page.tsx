@@ -5,8 +5,10 @@ import axios from 'axios';
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
+import {disconnectUser} from "../utils";
+import {logout} from "../../redux/slices/authSlice";
 
 interface Recipe {
     id: string;
@@ -28,6 +30,7 @@ interface NewRecipe {
 }
 
 const AdminPanel: React.FC = () => {
+    const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [newRecipe, setNewRecipe] = useState<NewRecipe>({
         category: '',
@@ -62,6 +65,7 @@ const AdminPanel: React.FC = () => {
     };
 
     useEffect(() => {
+        dispatch(logout());
         fetchRecipes();
         setClientReady(true); // Ensures client-side rendering
 
@@ -160,7 +164,7 @@ const AdminPanel: React.FC = () => {
     };
 
     return user && user.data?.role === "admin" ?
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-10">
             <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
 
             <form onSubmit={handleAddOrUpdateRecipe} className="bg-white p-6 rounded-lg shadow-lg mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">

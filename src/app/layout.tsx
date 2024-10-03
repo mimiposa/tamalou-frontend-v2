@@ -34,9 +34,6 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
       <html lang="en" className="min-h-dvh">
-      <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      </head>
       <I18nextProvider i18n={i18n}>
           <Provider store={store}>
               {/* PersistGate delays rendering until rehydration is complete */}
@@ -44,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <body
                       className={`bg-white flex overflow-y-auto scroll-auto min-h-dvh ${geistSans.variable} ${geistMono.variable}`}>
                   <Sidebar/>
-                  <div className="w-full">
+                  <div className="w-full p-10">
                       <header className="w-full fixed right-0 top-0">
                           <nav className="w-full flex justify-end items-end">
                               <NavLinks/>
