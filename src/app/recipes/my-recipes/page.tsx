@@ -3,7 +3,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {disconnectUser} from "../../utils";
 import {logout} from "../../../redux/slices/authSlice";
 import {useDispatch} from "react-redux";
 

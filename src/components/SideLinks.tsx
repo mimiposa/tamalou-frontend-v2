@@ -8,8 +8,6 @@ import Link from 'next/link';
 import {checkUserSession, logout} from '../redux/slices/authSlice';
 import { clearRecipe, resetClearRecipe } from '../redux/slices/recipeSlice';
 import Cookies from "js-cookie";
-import {jwtDecode} from "jwt-decode";
-import {disconnectUser} from "../app/utils";
 
 
 // Define the types for props

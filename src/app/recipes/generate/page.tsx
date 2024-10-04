@@ -9,8 +9,6 @@ import Image from 'next/image';
 import DOMPurify from 'dompurify';
 import logo from '../../../../public/assets/tamalou-logo.png';
 import {RootState} from "../../../redux/store";
-import Homepage from "../../../components/homepage";
-import {disconnectUser} from "../../utils";
 import {logout} from "../../../redux/slices/authSlice";
 
 // Define types for recipe and user
