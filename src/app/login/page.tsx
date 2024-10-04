@@ -6,14 +6,13 @@ import DOMPurify from 'dompurify';
 import {checkUserSession, login} from '../../redux/slices/authSlice'; // Import the login action
 import {AppDispatch, RootState} from '../../redux/store';
 import Homepage from '../../components/homepage';
-import Cookies from "js-cookie";
 
 const Login: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const {user, loading} = useSelector((state: RootState) => state.auth); // Redux for user state
+    const {user} = useSelector((state: RootState) => state.auth); // Redux for user state
     const [clientReady, setClientReady] = useState(false);
 
 
@@ -23,8 +22,6 @@ const Login: React.FC = () => {
 
 
     if (!clientReady) return null; // Avoid mismatches between server and client
-
-    const token = Cookies.get('token');
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
