@@ -7,7 +7,6 @@ import {checkUserSession, login} from '../../redux/slices/authSlice'; // Import 
 import {AppDispatch, RootState} from '../../redux/store';
 import Homepage from '../../components/homepage';
 import Cookies from "js-cookie";
-import {disconnectUser} from "../utils";
 
 const Login: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();

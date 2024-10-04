@@ -7,7 +7,6 @@ import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {disconnectUser} from "../utils";
 import {logout} from "../../redux/slices/authSlice";
 
 interface Recipe {

@@ -7,7 +7,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {logout, UserData} from "../../redux/slices/authSlice";
 import {t} from "i18next";
-import {disconnectUser} from "../utils";
 
 interface Recipe {
     id: string;
