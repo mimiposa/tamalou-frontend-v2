@@ -50,12 +50,11 @@ const ProfilePage: React.FC = () => {
         }
     };
 
-    const token = Cookies.get('token');
 
     useEffect(() => {
         dispatch(logout());
         setClientReady(true); // Ensures client-side rendering
-    }, []);
+    }, [dispatch]);
 
 
     // Fetch user profile and last 5 generated recipes
@@ -86,7 +85,7 @@ const ProfilePage: React.FC = () => {
             });
             setSuccess('Profile updated successfully!');
 
-            fetchUserData();
+            await fetchUserData();
         } catch (err) {
             setError( 'Failed to update recipe' );
         }
