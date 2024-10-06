@@ -52,7 +52,6 @@ const ProfilePage: React.FC = () => {
 
 
     useEffect(() => {
-        dispatch(logout());
         setClientReady(true); // Ensures client-side rendering
     }, [dispatch]);
 

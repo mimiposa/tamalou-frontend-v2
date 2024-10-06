@@ -41,7 +41,7 @@ const AdminPanel: React.FC = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const { user, loading } = useSelector((state: RootState) => state.auth); // Redux for user state
+    const { user, retrievedUser, loading } = useSelector((state: RootState) => state.auth); // Redux for user state
 
     const router = useRouter();
     const { t } = useTranslation();
@@ -49,7 +49,6 @@ const AdminPanel: React.FC = () => {
     const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
 
     const [clientReady, setClientReady] = useState(false);
-
 
     const fetchRecipes = async () => {
         try {
@@ -64,17 +63,11 @@ const AdminPanel: React.FC = () => {
     };
 
     useEffect(() => {
-        dispatch(logout());
         fetchRecipes();
         setClientReady(true); // Ensures client-side rendering
-
     }, []);
 
-    useEffect(() => {
-        if (!loading && !user) {
-            router.push('/login');
-        }
-    }, [user, loading, router]);
+
 
     if (loading) {
         return <p>Loading...</p>;

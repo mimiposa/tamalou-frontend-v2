@@ -27,27 +27,28 @@ const ProfilePage: React.FC = () => {
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: 0, name: '', ingredients: '', notes: '' });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const token = Cookies.get('token');
-            if (token) {
-                try {
-                    const response = await axios.get(
-                        `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
-                        {
-                            headers: { Authorization: `Bearer ${token}` },
-                        }
-                    );
-                    const { data } = response;
-                    setUserProfile(data.user);
-                    setLast5Recipes(data.recipes || []);
-                } catch (error) {
-                    console.error('Error fetching profile data:', error);
-                }
-            }
-        };
         dispatch(logout());
         fetchData();
-    }, []);
+    }, [dispatch]);
+
+    const fetchData = async () => {
+        const token = Cookies.get('token');
+        if (token) {
+            try {
+                const response = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
+                const { data } = response;
+                setUserProfile(data.user);
+                setLast5Recipes(data.recipes || []);
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        }
+    };
 
     // Handle Add Recipe
     const handleAddRecipe = async (e: FormEvent<HTMLFormElement>) => {

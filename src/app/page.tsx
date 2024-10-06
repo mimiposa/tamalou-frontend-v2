@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../redux/store';
-import React, {FC, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
+import React, {FC} from 'react';
 import Homepage from "../components/homepage";
 
 const Home: FC = () => {

@@ -8,7 +8,7 @@ import Link from "next/link";
 import React from "react";
 
 export const Homepage: React.FC = () => {
-    const {user, loading} = useSelector((state: RootState) => state.auth); // Redux for user state
+    const {user} = useSelector((state: RootState) => state.auth); // Redux for user state
 
     const handleRecipesNavigation = () => {
         router.push('/recipes/generate'); // Navigate to the profile page

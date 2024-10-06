@@ -21,27 +21,18 @@ interface Recipe {
 
 const CreateRecipe: React.FC = () => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
-    const [symptoms, setSymptoms] = useState('');
+    const [symptomsValue, setSymptoms] = useState('');
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     const { user } = useSelector((state: RootState) => state.auth); // Redux for user state
     const { isClear } = useSelector((state: RootState) => state.recipe); // Redux for recipe state
 
 
     useEffect(() => {
-        dispatch(logout());
         setRecipe(null);
     }, [isClear]);
 
-    const token = Cookies.get('token');
-
-    const handleGenerateRecipe = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setError('');
-        setSuccess('');
-        setRecipe(null);
-
+    const callRecipeGenerate = async (symptoms: string) => {
         const token = Cookies.get('token');
 
         if (!user || !token) {
@@ -62,7 +53,6 @@ const CreateRecipe: React.FC = () => {
             );
 
             setRecipe(response.data);
-            setSuccess('Recipe generated successfully!');
         } catch (err: any) {
             console.error('Error generating recipe:', err);
             const errorMessage =
@@ -71,41 +61,20 @@ const CreateRecipe: React.FC = () => {
                     : 'Failed to generate recipe. Please try again.';
             setError(errorMessage);
         }
+    }
+
+
+    const handleGenerateRecipe = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setError('');
+        setRecipe(null);
+        await callRecipeGenerate(symptomsValue)
     };
 
     const handleGenerateRecipeOnClick = async (symptoms: string) => {
         setError('');
-        setSuccess('');
         setRecipe(null);
-
-        const token = Cookies.get('token');
-
-        if (!user || !token) {
-            setError('You must be logged in to generate a recipe.');
-            return;
-        }
-
-        try {
-            const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/recipes/generate`,
-                { symptoms },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            setRecipe(response.data);
-            setSuccess('Recipe generated successfully!');
-        } catch (err: any) {
-            console.error('Error generating recipe:', err);
-            const errorMessage =
-                err.response?.status === 404
-                    ? err.response.data.error
-                    : 'Failed to generate recipe. Please try again.';
-            setError(errorMessage);
-        }
+        await callRecipeGenerate(symptoms)
     };
 
     const handleSaveRecipe = async () => {
@@ -128,7 +97,6 @@ const CreateRecipe: React.FC = () => {
                 }
             );
 
-            setSuccess('Recipe saved successfully!');
         } catch (err) {
             console.error('Error saving recipe:', err);
             setError('Failed to save the recipe. Please try again.');
@@ -216,7 +184,7 @@ const CreateRecipe: React.FC = () => {
                             <input
                                 type="text"
                                 placeholder="Enter symptoms or preferences"
-                                value={symptoms}
+                                value={symptomsValue}
                                 onChange={(e) => setSymptoms(DOMPurify.sanitize(e.target.value))}
                                 className="flex-grow p-3 border-none rounded-full focus:outline-none bg-transparent"
                                 required

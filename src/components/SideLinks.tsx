@@ -17,14 +17,12 @@ interface SideLinksProps {
 
 const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
-    const router = useRouter(); // Initialize router for navigation
     const { user, retrievedUser, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
     const { isClear } = useSelector((state: RootState) => state.recipe); // Use Redux state for recipe
 
     useEffect(() => {
-        dispatch(logout());
-        // @ts-ignore
-        dispatch(checkUserSession());
+        //dispatch(logout());
+        checkUserSession();
     }, []);
 
 
@@ -34,9 +32,9 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
             dispatch(resetClearRecipe()); // Dispatch the resetClearRecipe action from Redux
 
         }
-        // @ts-ignore
-        dispatch(checkUserSession());
-    }, [isClear]);
+        checkUserSession();
+
+    }, [isClear, user, retrievedUser]);
 
 
 
@@ -66,7 +64,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
             >
                 <span className="ml-3">Home</span>
             </Link>
-            {retrievedUser && (
+            {(user || retrievedUser) && (
                 <>
                     <Link
                         href="/recipes/generate"
@@ -77,7 +75,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
                     </Link>
                 </>
             )}
-            {retrievedUser && retrievedUser.user.role === 'admin' && (
+            {((user && user.data?.role === 'admin') || (retrievedUser && retrievedUser.user.role === 'admin'))  && (
                 <Link
                     href="/admin"
                     className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400"

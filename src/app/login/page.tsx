@@ -20,7 +20,6 @@ const Login: React.FC = () => {
         setClientReady(true); // Ensures client-side rendering
     }, []);
 
-
     if (!clientReady) return null; // Avoid mismatches between server and client
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -28,18 +27,18 @@ const Login: React.FC = () => {
         setError('');  // Clear any previous errors
 
         try {
-            await dispatch(login({email, password}));
-            await dispatch(checkUserSession());
-
-
+            if(!user) {
+                await dispatch(login({email, password}));
+            } else {
+                await dispatch(checkUserSession());
+            }
         } catch (err) {
             setError('Login failed. Please check your credentials.');
         }
     };
 
-
     return (
-        <>
+        <div>
             {clientReady && user ?
                 <Homepage/> :
                 <div className="flex flex-col items-center justify-center md:p-8 min-h-dvh p-10">
@@ -72,7 +71,7 @@ const Login: React.FC = () => {
                     </div>
                 </div>
             }
-        </>
+        </div>
 
     )
 

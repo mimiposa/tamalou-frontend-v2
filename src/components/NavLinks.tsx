@@ -10,7 +10,6 @@ import { logout } from '../redux/slices/authSlice';
 const NavLinks = () => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const router  = useRouter(); // Initialize dispatch for Redux actions
-    const { user, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
     const [open, setOpen] = useState(false);
 
     const openDropDown = () => {

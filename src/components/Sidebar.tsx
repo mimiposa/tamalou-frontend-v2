@@ -9,16 +9,13 @@ const Sidebar: React.FC = () => {
     const burgerRef = useRef<HTMLButtonElement>(null); // Ref for the burger button
 
     const toggleSidebar = () => {
-        // Toggle sidebar state when clicking on the burger button
         setIsSidebarOpen((prevState) => !prevState);
     };
 
     const closeSidebar = () => {
-        // Close sidebar
         setIsSidebarOpen(false);
     };
 
-    // Handle click outside to close sidebar
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -32,12 +29,12 @@ const Sidebar: React.FC = () => {
         };
 
         // Add event listener
-        document.addEventListener('mousedown', handleClickOutside);
+       // document.addEventListener('mousedown', handleClickOutside);
 
         // Cleanup event listener on component unmount
-        return () => {
+       /* return () => {
             document.removeEventListener('mousedown', handleClickOutside);
-        };
+        };*/
     }, []);
 
     return (
