@@ -2,13 +2,10 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import Link from 'next/link';
-import {checkUserSession, logout} from '../redux/slices/authSlice';
+import {checkUserSession} from '../redux/slices/authSlice';
 import { clearRecipe, resetClearRecipe } from '../redux/slices/recipeSlice';
-import Cookies from "js-cookie";
-
 
 // Define the types for props
 interface SideLinksProps {
@@ -17,11 +14,10 @@ interface SideLinksProps {
 
 const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
-    const { user, retrievedUser, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
+    const { user, retrievedUser} = useSelector((state: RootState) => state.auth); // Use Redux state for auth
     const { isClear } = useSelector((state: RootState) => state.recipe); // Use Redux state for recipe
 
     useEffect(() => {
-        //dispatch(logout());
         checkUserSession();
     }, []);
 
@@ -34,7 +30,7 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
         }
         checkUserSession();
 
-    }, [isClear, user, retrievedUser]);
+    }, [isClear, user, retrievedUser, dispatch]);
 
 
 
@@ -50,36 +46,20 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
         closeSidebar();
     };
 
-    const token = Cookies.get('token');
-    console.log("user", user)
-    console.log("retrievedUser", retrievedUser)
 
 
     return (
         <>
-            <Link
-                href="/"
-                onClick={handleLinkClick}
-                className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition hover:text-gray-400 focus:text-gray-400"
-            >
+            <Link href="/" onClick={handleLinkClick} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition hover:text-gray-400 focus:text-gray-400">
                 <span className="ml-3">Home</span>
             </Link>
             {(user || retrievedUser) && (
-                <>
-                    <Link
-                        href="/recipes/generate"
-                        onClick={handleClearRecipe}
-                        className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400"
-                    >
-                        <span className="ml-3">Tamalou</span>
-                    </Link>
-                </>
+                <Link href="../app/recipes/generate" onClick={handleClearRecipe} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
+                    <span className="ml-3">Tamalou</span>
+                </Link>
             )}
             {((user && user.data?.role === 'admin') || (retrievedUser && retrievedUser.user.role === 'admin'))  && (
-                <Link
-                    href="/admin"
-                    className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400"
-                >
+                <Link href="../app/admin" className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
                     <span className="ml-3">Admin Panel</span>
                 </Link>
             )}
