@@ -10,16 +10,12 @@ import React from "react";
 export const Homepage: React.FC = () => {
     const {user} = useSelector((state: RootState) => state.auth); // Redux for user state
 
-    const handleRecipesNavigation = () => {
-        router.push('/recipes/generate'); // Navigate to the profile page
-    };
-
     return <>
             <div className="flex flex-col items-center justify-center">
                 <div className="max-w-7xl mx-auto">
                     {/* Welcome Section */}
                     <div className="mb-10">
-                        <h2 className="text-2xl font-bold mb-6">Welcome {user?.data?.name} !</h2>
+                        <h2 className="text-2xl font-bold mb-6 mt-6">Welcome {user?.data?.name} !</h2>
                         <p className="text-sm font-medium text-gray-800">Find personalized essential oil recipes to relieve your
                             everyday aches and pains.</p>
                     </div>
@@ -99,7 +95,6 @@ export const Homepage: React.FC = () => {
                                 </div>
                                 <div className="flex justify-center items-center mt-3">
                                     <button
-                                        onClick={() => handleRecipesNavigation}
                                         className="text-md bg-gray-800 text-white px-4 py-2 rounded-lg">View Recipes</button>
                                 </div>
                             </div>

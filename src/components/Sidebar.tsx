@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import SideLinks from '../components/SideLinks';
+import SideLinks from './SideLinks';
 
 const Sidebar: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -28,13 +28,15 @@ const Sidebar: React.FC = () => {
             }
         };
 
-        // Add event listener
-       // document.addEventListener('mousedown', handleClickOutside);
+        if (typeof document !== 'undefined') {
+            // Add event listener
+            document.addEventListener('mousedown', handleClickOutside);
 
-        // Cleanup event listener on component unmount
-       /* return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };*/
+            // Cleanup event listener on component unmount
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }
     }, []);
 
     return (

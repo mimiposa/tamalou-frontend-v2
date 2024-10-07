@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import {checkUserSession} from '../redux/slices/authSlice';
 import { clearRecipe, resetClearRecipe } from '../redux/slices/recipeSlice';
@@ -54,12 +54,12 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
                 <span className="ml-3">Home</span>
             </Link>
             {(user || retrievedUser) && (
-                <Link href="../app/recipes/generate" onClick={handleClearRecipe} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
+                <Link href="/recipes/generate" onClick={handleClearRecipe} className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
                     <span className="ml-3">Tamalou</span>
                 </Link>
             )}
             {((user && user.data?.role === 'admin') || (retrievedUser && retrievedUser.user.role === 'admin'))  && (
-                <Link href="../app/admin" className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
+                <Link href="/admin" className="flex items-center px-4 py-2 text-gray-700 rounded-lg transition focus:text-gray-400">
                     <span className="ml-3">Admin Panel</span>
                 </Link>
             )}
