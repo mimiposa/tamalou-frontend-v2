@@ -6,9 +6,13 @@ import {RootState} from "../redux/store";
 import {router} from "next/client";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 export const Homepage: React.FC = () => {
     const {user} = useSelector((state: RootState) => state.auth); // Redux for user state
+    const profileSrc = "/assets/Tamalou-profile.jpg"
+    const generateurSrc = "/assets/generateur.jpg"
+    const recipeSrc = "/assets/recipes.jpg"
 
     return <>
             <div className="flex flex-col items-center justify-center">
@@ -29,13 +33,15 @@ export const Homepage: React.FC = () => {
                             {/* Card 1: Set up your profile */}
                             <div className="flex flex-col justify-between bg-white p-6 rounded-lg shadow-lg">
                                 <div className="flex items-center justify-center mb-4">
-                                    <div className="bg-gray-200 p-4 rounded-full">
+                                    <Image src={profileSrc} alt="profile" width={200} height={200}/>
+
+                                    {/*<div className="bg-gray-200 p-4 rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-500"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                   d="M5.121 19.071A7.5 7.5 0 0112 12m0 0a7.5 7.5 0 017.071 7.071M12 12v4m0-10a3 3 0 100 6 3 3 0 000-6z"/>
                                         </svg>
-                                    </div>
+                                    </div>*/}
                                 </div>
                                 <div className="mb-4">
                                     <h3 className="text-md font-semibold text-gray-700 mt-3 mb-3">Set up your profile</h3>
@@ -55,13 +61,15 @@ export const Homepage: React.FC = () => {
                             {/* Card 2: Generate your first recipe */}
                             <div className="flex flex-col justify-between bg-white p-6 rounded-lg shadow-lg">
                                 <div className="flex items-center justify-center mb-4">
-                                    <div className="bg-gray-200 p-4 rounded-full">
+                                    <Image src={generateurSrc} alt="profile" width={200} height={200}/>
+
+                                    {/*<div className="bg-gray-200 p-4 rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-500"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                   d="M8 12h8m-4-4v8m7-8H5m0 0v8a2 2 0 002 2h10a2 2 0 002-2V8m-2 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2z"/>
                                         </svg>
-                                    </div>
+                                    </div>*/}
                                 </div>
                                 <div className="mb-4">
                                     <h3 className="text-md font-semibold text-gray-700 mt-3 mb-3">Generate your first recipe</h3>
@@ -81,13 +89,15 @@ export const Homepage: React.FC = () => {
                             {/* Card 3: Explore your saved recipes */}
                             <div className="flex flex-col justify-between p-6 rounded-lg shadow-lg">
                                 <div className="flex items-center justify-center mb-4">
-                                    <div className="bg-gray-200 p-4 rounded-full">
+                                    <Image src={recipeSrc} alt="profile" width={200} height={200}/>
+
+                                    {/*<div className="bg-gray-200 p-4 rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-500"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                   d="M5 5v14l7-7 7 7V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"/>
                                         </svg>
-                                    </div>
+                                    </div>*/}
                                 </div>
                                 <div className="mb-4">
                                     <h3 className="text-md font-semibold text-gray-700 mt-3 mb-3">Explore your saved recipes</h3>

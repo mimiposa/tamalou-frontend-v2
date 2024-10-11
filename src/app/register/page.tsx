@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import {useState, FormEvent, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
 import {AppDispatch, RootState} from '../../redux/store';
-import { register } from '../../redux/slices/authSlice';
+import {checkUserSession, register} from '../../redux/slices/authSlice';
 import {name} from "ts-interface-checker"; // Correctly import the async thunk
 
 const Register: React.FC = () => {
@@ -39,8 +39,12 @@ const Register: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        dispatch(checkUserSession())
+    }, [dispatch]);
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-dvh p-10">
+        <div className="flex flex-col items-center justify-center min-h-dvh md:p-10">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold mb-6 text-center">Create Your Account</h1>
                 <form onSubmit={handleRegister} className="space-y-4">

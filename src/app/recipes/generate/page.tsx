@@ -9,7 +9,7 @@ import Image from 'next/image';
 import DOMPurify from 'dompurify';
 import logo from '../../../../public/assets/tamalou-logo.png';
 import {RootState} from "../../../redux/store";
-import {logout} from "../../../redux/slices/authSlice";
+import {checkUserSession, logout} from "../../../redux/slices/authSlice";
 
 // Define types for recipe and user
 interface Recipe {
@@ -26,6 +26,10 @@ const CreateRecipe: React.FC = () => {
     const [error, setError] = useState('');
     const { user } = useSelector((state: RootState) => state.auth); // Redux for user state
     const { isClear } = useSelector((state: RootState) => state.recipe); // Redux for recipe state
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
 
     useEffect(() => {
@@ -104,7 +108,7 @@ const CreateRecipe: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center md:overflow-y-hidden justify-end min-h-dvh p-10">
+        <div className="flex flex-col items-center md:overflow-y-hidden justify-end min-h-dvh md:p-10">
             {user &&
                 <main className="h-dvh flex-1 md:p-6 md:overflow-y-hidden flex flex-col items-center justify-between">
                     {recipe ?

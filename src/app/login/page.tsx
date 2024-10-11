@@ -41,7 +41,7 @@ const Login: React.FC = () => {
         <div>
             {clientReady && user ?
                 <Homepage/> :
-                <div className="flex flex-col items-center justify-center md:p-8 min-h-dvh p-10">
+                <div className="flex flex-col items-center justify-center md:p-10 min-h-dvh">
                     <div className="w-full max-w-md p-8 bg-white rounded-lg md:shadow-lg">
                         <h1 className="text-2xl font-bold mb-6 text-center">Welcome!</h1>
                         <form onSubmit={handleLogin} className="space-y-4">
