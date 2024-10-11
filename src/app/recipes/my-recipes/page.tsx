@@ -3,7 +3,7 @@
 import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {logout} from "../../../redux/slices/authSlice";
+import {checkUserSession, logout} from "../../../redux/slices/authSlice";
 import {useDispatch} from "react-redux";
 
 // Define types for recipe and user profile
@@ -27,7 +27,10 @@ const ProfilePage: React.FC = () => {
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: 0, name: '', ingredients: '', notes: '' });
 
     useEffect(() => {
-        dispatch(logout());
+        checkUserSession()
+    }, []);
+
+    useEffect(() => {
         fetchData();
     }, [dispatch]);
 

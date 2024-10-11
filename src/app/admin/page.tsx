@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {logout} from "../../redux/slices/authSlice";
+import {checkUserSession, logout} from "../../redux/slices/authSlice";
 
 interface Recipe {
     id: string;
@@ -61,6 +61,10 @@ const AdminPanel: React.FC = () => {
             setError(err.response?.data?.error || 'Failed to fetch recipes.');
         }
     };
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
     useEffect(() => {
         fetchRecipes();

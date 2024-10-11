@@ -5,7 +5,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {logout, UserData} from "../../redux/slices/authSlice";
+import {checkUserSession, logout, UserData} from "../../redux/slices/authSlice";
 import {t} from "i18next";
 
 interface Recipe {
@@ -49,6 +49,10 @@ const ProfilePage: React.FC = () => {
             console.error('Error fetching profile data:', error);
         }
     };
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
 
     useEffect(() => {
