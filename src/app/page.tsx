@@ -8,7 +8,7 @@ import Homepage from "../components/homepage";
 
 const Home: FC = () => {
 
-    const { user } = useSelector((state: RootState) => state.auth); // Redux for user state
+    const { user } = useSelector((state: RootState) => state?.auth); // Redux for user state
 
     return (
         <div className="flex flex-col items-center justify-center md:p-8 min-h-dvh">

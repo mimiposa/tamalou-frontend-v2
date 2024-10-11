@@ -5,7 +5,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {checkUserSession, logout, UserData} from "../../redux/slices/authSlice";
+import {checkUserSession, UserData} from "../../redux/slices/authSlice";
 import {t} from "i18next";
 
 interface Recipe {
@@ -24,13 +24,17 @@ const ProfilePage: React.FC = () => {
     const [userProfile, setUserProfile] = useState<UserData | null>(null);
     const [last5Recipes, setLast5Recipes] = useState<Recipe[]>([]);
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: '', name: '', ingredients: '', notes: '' });
-    const { user } = useSelector((state: RootState) => state.auth); // Redux for user state
+    const { user } = useSelector((state: RootState) => state?.auth); // Redux for user state
     const [clientReady, setClientReady] = useState(false);
 
     const [newProfile, setNewProfile] = useState<UserData>({
         data: null
 
     });
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
     const fetchUserData = async () => {
         const token = Cookies.get('token');
@@ -49,10 +53,6 @@ const ProfilePage: React.FC = () => {
             console.error('Error fetching profile data:', error);
         }
     };
-
-    useEffect(() => {
-        checkUserSession()
-    }, []);
 
 
     useEffect(() => {

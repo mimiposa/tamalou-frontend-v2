@@ -3,13 +3,12 @@
 
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-import {router} from "next/client";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 
 export const Homepage: React.FC = () => {
-    const {user} = useSelector((state: RootState) => state.auth); // Redux for user state
+    const {user} = useSelector((state: RootState) => state?.auth); // Redux for user state
     const profileSrc = "/assets/Tamalou-profile.jpg"
     const generateurSrc = "/assets/generateur.jpg"
     const recipeSrc = "/assets/recipes.jpg"

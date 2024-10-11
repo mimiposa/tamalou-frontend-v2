@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {checkUserSession, logout} from "../../redux/slices/authSlice";
+import {checkUserSession} from "../../redux/slices/authSlice";
 
 interface Recipe {
     id: string;
@@ -29,7 +29,6 @@ interface NewRecipe {
 }
 
 const AdminPanel: React.FC = () => {
-    const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [newRecipe, setNewRecipe] = useState<NewRecipe>({
         category: '',
@@ -41,14 +40,17 @@ const AdminPanel: React.FC = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const { user, retrievedUser, loading } = useSelector((state: RootState) => state.auth); // Redux for user state
+    const { user, loading } = useSelector((state: RootState) => state?.auth); // Redux for user state
 
-    const router = useRouter();
     const { t } = useTranslation();
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
     const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
 
     const [clientReady, setClientReady] = useState(false);
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
     const fetchRecipes = async () => {
         try {
@@ -61,10 +63,6 @@ const AdminPanel: React.FC = () => {
             setError(err.response?.data?.error || 'Failed to fetch recipes.');
         }
     };
-
-    useEffect(() => {
-        checkUserSession()
-    }, []);
 
     useEffect(() => {
         fetchRecipes();

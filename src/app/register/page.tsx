@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
 import {AppDispatch, RootState} from '../../redux/store';
 import {checkUserSession, register} from '../../redux/slices/authSlice';
-import {name} from "ts-interface-checker"; // Correctly import the async thunk
 
 const Register: React.FC = () => {
     const [name, setName] = useState<string>('');
@@ -17,7 +16,11 @@ const Register: React.FC = () => {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>(); // Correctly type dispatch for thunks
 
-    const { user, loading } = useSelector((state: RootState) => state.auth); // Use Redux state for auth
+    const { loading } = useSelector((state: RootState) => state?.auth); // Use Redux state for auth
+
+    useEffect(() => {
+        checkUserSession()
+    }, []);
 
     const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -39,9 +42,6 @@ const Register: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        dispatch(checkUserSession())
-    }, [dispatch]);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-dvh md:p-10">
