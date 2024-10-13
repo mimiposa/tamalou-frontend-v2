@@ -16,7 +16,7 @@ const Register: React.FC = () => {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>(); // Correctly type dispatch for thunks
 
-    const { loading } = useSelector((state: RootState) => state?.auth); // Use Redux state for auth
+    const { loading } = useSelector((state: RootState) => state?.auth || {}); // Use Redux state for auth
 
     useEffect(() => {
         checkUserSession()

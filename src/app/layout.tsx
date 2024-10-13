@@ -40,8 +40,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <body
                       className={`bg-white flex overflow-y-auto scroll-auto min-h-dvh ${geistSans.variable} ${geistMono.variable}`}>
                   <Sidebar/>
-                  <div className="w-full p-10">
-                      <header className="w-full fixed right-0 top-0">
+                  <div className="w-full p-6 md:p-10">
+                      <header className="w-full right-0 top-0">
                           <nav className="w-full flex justify-end items-end">
                               <NavLinks/>
                           </nav>

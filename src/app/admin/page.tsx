@@ -40,7 +40,7 @@ const AdminPanel: React.FC = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const { user, loading } = useSelector((state: RootState) => state?.auth); // Redux for user state
+    const { user, loading } = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
 
     const { t } = useTranslation();
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});

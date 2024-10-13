@@ -23,8 +23,8 @@ const CreateRecipe: React.FC = () => {
     const [symptomsValue, setSymptoms] = useState('');
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [error, setError] = useState('');
-    const { user } = useSelector((state: RootState) => state?.auth); // Redux for user state
-    const { isClear } = useSelector((state: RootState) => state?.recipe); // Redux for recipe state
+    const { user } = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
+    const { isClear } = useSelector((state: RootState) => state?.recipe || {}); // Redux for recipe state
 
     useEffect(() => {
         checkUserSession()
@@ -109,9 +109,9 @@ const CreateRecipe: React.FC = () => {
     return (
         <div className="flex flex-col items-center md:overflow-y-hidden justify-end min-h-dvh md:p-10">
             {user &&
-                <main className="h-dvh flex-1 md:p-6 md:overflow-y-hidden flex flex-col items-center justify-between">
+                <main className="h-dvh flex-1 md:p-10 md:overflow-y-hidden flex flex-col items-center justify-between">
                     {recipe ?
-                        <div className="w-full max-w-3xl md:p-6 bg-white rounded-lg mb-4 flex flex-grow flex-col items-start justify-center">
+                        <div className="w-full max-w-3xl p-8 md:p-6 bg-white rounded-lg mb-4 flex flex-grow flex-col items-start justify-center">
                             {/* Generated Recipe Section */}
                             <h2 className="text-xl font-semibold mb-2 capitalize">{recipe.name}</h2>
                             <p className="mb-2">

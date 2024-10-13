@@ -26,7 +26,7 @@ const NavLinks = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="absolute w-full flex justify-end right-2 top-5">
             <button
                 id="profile-btn"
                 onClick={openDropDown}
@@ -38,7 +38,7 @@ const NavLinks = () => {
             {open && (
                 <div
                     id="profile-menu"
-                    className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10"
+                    className="absolute top-6 right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10"
                 >
                     <div
                         onClick={handleProfileNavigation}

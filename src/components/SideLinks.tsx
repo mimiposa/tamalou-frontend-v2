@@ -14,12 +14,12 @@ interface SideLinksProps {
 
 const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
-    const { user, retrievedUser} = useSelector((state: RootState) => state?.auth); // Use Redux state for auth
-    const { isClear } = useSelector((state: RootState) => state?.recipe); // Use Redux state for recipe
+    const { user, retrievedUser } = useSelector((state: RootState) => state?.auth || {});
+    const { isClear } = useSelector((state: RootState) => state?.recipe || {}); // Use Redux state for recipe
 
     useEffect(() => {
         checkUserSession();
-    }, []);
+    }, [user]);
 
 
     useEffect(() => {

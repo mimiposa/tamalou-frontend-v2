@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import {jwtDecode} from "jwt-decode";
 import {purgeStoredState} from "redux-persist";
 import {persistConfig} from "../store";
+import {router} from "next/client";
 
 // Define the initial state
 interface AuthState {
@@ -95,7 +96,7 @@ const authSlice = createSlice({
             purgeStoredState(persistConfig);
             state.user = null;
             state.retrievedUser = null;
-            //router.push('/login')
+            router.push('/')
         },
     },
     extraReducers: (builder) => {

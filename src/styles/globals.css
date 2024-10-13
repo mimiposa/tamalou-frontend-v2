@@ -30,6 +30,11 @@ html, body {
   line-height: 1.6;
 }
 
+img {
+  min-width: 100%;
+  border-radius: 2%;
+}
+
 a {
   color: #0070f3;
   text-decoration: none;
@@ -43,6 +48,22 @@ a:hover {
 nav a {
   margin-right: 1rem;
   font-weight: 600;
+}
+
+.home-header {
+  background-image: url("../../public/assets/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center left;
+  height: 198px;
+  text-align: center;
+}
+
+.banner-title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
 main {

@@ -12,7 +12,8 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const {user} = useSelector((state: RootState) => state?.auth); // Redux for user state
+
+    const {user} = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
     const [clientReady, setClientReady] = useState(false);
 
 

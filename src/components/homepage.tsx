@@ -16,16 +16,19 @@ export const Homepage: React.FC = () => {
     return <>
             <div className="flex flex-col items-center justify-center">
                 <div className="max-w-7xl mx-auto">
-                    {/* Welcome Section */}
-                    <div className="mb-10">
-                        <h2 className="text-2xl font-bold mb-6 mt-6">Welcome {user?.data?.name} !</h2>
-                        <p className="text-sm font-medium text-gray-800">Find personalized essential oil recipes to relieve your
-                            everyday aches and pains.</p>
+                    <div className="home-header flex flex-col justify-center items-center">
+                        {/* Welcome Section */}
+                        <div className="mb-10 text-gray-700">
+                            <h2 className="text-2xl font-bold mb-6 mt-6">Welcome {user?.data?.name} !</h2>
+                            <p className="text-sm font-medium">Find personalized essential oil recipes to relieve your
+                                everyday aches and pains.</p>
+                        </div>
+
                     </div>
 
                     {/* Get Started Section */}
                     <section className="mb-10">
-                        <h2 className="text-2xl font-bold mb-6">Get Started</h2>
+                        <h2 className="text-2xl font-bold mt-6">Get Started</h2>
 
                         {/* Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -60,7 +63,11 @@ export const Homepage: React.FC = () => {
                             {/* Card 2: Generate your first recipe */}
                             <div className="flex flex-col justify-between bg-white p-6 rounded-lg shadow-lg">
                                 <div className="flex items-center justify-center mb-4">
-                                    <Image src={generateurSrc} alt="profile" width={200} height={200}/>
+                                    <Image src={generateurSrc} alt="profile"
+                                           width="200"
+                                           height={200}
+                                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
 
                                     {/*<div className="bg-gray-200 p-4 rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-500"

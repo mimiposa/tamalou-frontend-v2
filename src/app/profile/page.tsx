@@ -24,7 +24,7 @@ const ProfilePage: React.FC = () => {
     const [userProfile, setUserProfile] = useState<UserData | null>(null);
     const [last5Recipes, setLast5Recipes] = useState<Recipe[]>([]);
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: '', name: '', ingredients: '', notes: '' });
-    const { user } = useSelector((state: RootState) => state?.auth); // Redux for user state
+    const { user } = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
     const [clientReady, setClientReady] = useState(false);
 
     const [newProfile, setNewProfile] = useState<UserData>({
