@@ -96,7 +96,7 @@ const authSlice = createSlice({
             purgeStoredState(persistConfig);
             state.user = null;
             state.retrievedUser = null;
-            //router.push('/')
+            router.push('/')
         },
     },
     extraReducers: (builder) => {
