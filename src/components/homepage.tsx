@@ -8,7 +8,7 @@ import React from "react";
 import Image from "next/image";
 
 export const Homepage: React.FC = () => {
-    const {user} = useSelector((state: RootState) => state?.auth); // Redux for user state
+    const {user} = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
     const profileSrc = "/assets/Tamalou-profile.jpg"
     const generateurSrc = "/assets/generateur.jpg"
     const recipeSrc = "/assets/recipes.jpg"
