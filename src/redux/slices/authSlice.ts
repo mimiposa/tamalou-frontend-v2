@@ -52,7 +52,6 @@ export const checkUserSession = createAsyncThunk('auth/checkUserSession', async 
         if (isTokenExpired(token)) {
             // If token expired, log out the user
             dispatch(logout());
-            return null;
         }
 
         // If token is valid, fetch user data
@@ -96,7 +95,6 @@ const authSlice = createSlice({
             purgeStoredState(persistConfig);
             state.user = null;
             state.retrievedUser = null;
-            router.push('/')
         },
     },
     extraReducers: (builder) => {

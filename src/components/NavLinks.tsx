@@ -10,6 +10,7 @@ import { logout } from '../redux/slices/authSlice';
 const NavLinks = () => {
     const dispatch = useDispatch(); // Initialize dispatch for Redux actions
     const router  = useRouter(); // Initialize dispatch for Redux actions
+    const { user } = useSelector((state: RootState) => state?.auth || {});
     const [open, setOpen] = useState(false);
 
     const openDropDown = () => {
@@ -26,7 +27,7 @@ const NavLinks = () => {
     };
 
     return (
-        <div className="absolute w-full flex justify-end right-2 top-5">
+        user && <div className="absolute w-full flex justify-end right-2 top-5">
             <button
                 id="profile-btn"
                 onClick={openDropDown}

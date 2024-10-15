@@ -2,9 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react';
 import SideLinks from './SideLinks';
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
 
 const Sidebar: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { user } = useSelector((state: RootState) => state?.auth || {});
     const sidebarRef = useRef<HTMLDivElement>(null);
     const burgerRef = useRef<HTMLButtonElement>(null); // Ref for the burger button
 
@@ -65,7 +68,7 @@ const Sidebar: React.FC = () => {
             </button>
 
             {/* Sidebar */}
-            <aside
+            {user && <aside
                 ref={sidebarRef}
                 className={`fixed inset-y-0 left-0 transform bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto transition-transform duration-200 ease-in-out z-10 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-64`}
             >
@@ -76,7 +79,7 @@ const Sidebar: React.FC = () => {
                         <SideLinks closeSidebar={closeSidebar} />
                     </nav>
                 </div>
-            </aside>
+            </aside>}
         </>
     );
 };
