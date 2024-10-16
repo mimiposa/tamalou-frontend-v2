@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {jwtDecode} from "jwt-decode";
-import {purgeStoredState} from "redux-persist";
-import {persistConfig} from "../store";
-import {router} from "next/client";
+import { purgeStoredState } from "redux-persist";
+import { persistConfig } from "../store";
+import { useRouter } from 'next/router';
 
 // Define the initial state
 interface AuthState {
@@ -16,7 +16,6 @@ interface AuthState {
 export interface UserData {
     data: null | User;
 }
-
 
 export interface User {
     user: any;
@@ -43,15 +42,20 @@ const isTokenExpired = (token: string): boolean => {
     }
 };
 
-// Async thunk for checking user retrievedUser
+// Async thunk for checking user session
 export const checkUserSession = createAsyncThunk('auth/checkUserSession', async (_, { dispatch }) => {
     const token = Cookies.get('token');
 
     if (token) {
         // Check if token has expired
         if (isTokenExpired(token)) {
-            // If token expired, log out the user
+            // If token expired, log out the user and redirect to login
             dispatch(logout());
+            if (typeof window !== "undefined") {
+                const router = useRouter();
+                router.push('/');
+            }
+            return null;
         }
 
         // If token is valid, fetch user data
@@ -65,14 +69,9 @@ export const checkUserSession = createAsyncThunk('auth/checkUserSession', async 
 
 // Async thunk for logging in
 export const login = createAsyncThunk('auth/login', async ({ email, password }: { email: string; password: string }) => {
-    const token = Cookies.get('token');
-
     const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/users/login`,
         { email, password },
-        {
-            headers: { Authorization: `Bearer ${token}` }
-        }
     );
     Cookies.set('token', response.data.token);
 
@@ -95,6 +94,14 @@ const authSlice = createSlice({
             purgeStoredState(persistConfig);
             state.user = null;
             state.retrievedUser = null;
+            const token = Cookies.get('token');
+            if(token) {
+                if (typeof window !== "undefined" && isTokenExpired(token)) {
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                    const router = useRouter();
+                    router.push('/');
+                }
+            }
         },
     },
     extraReducers: (builder) => {

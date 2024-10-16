@@ -26,15 +26,18 @@ const SideLinks: React.FC<SideLinksProps> = ({ closeSidebar }) => {
         if (isClear) {
             // Reset the state after clearing the recipe
             dispatch(resetClearRecipe()); // Dispatch the resetClearRecipe action from Redux
-
         }
-        checkUserSession();
+        // @ts-ignore
+        dispatch(checkUserSession())
 
     }, [isClear, user, retrievedUser, dispatch]);
 
 
 
     const handleLinkClick = async () => {
+        // @ts-ignore
+        dispatch(checkUserSession())
+
         // Call closeSidebar to close the sidebar when a link is clicked
         closeSidebar();
     };

@@ -29,12 +29,14 @@ const ProfilePage: React.FC = () => {
 
     const [newProfile, setNewProfile] = useState<UserData>({
         data: null
-
     });
 
     useEffect(() => {
-        checkUserSession()
+        // @ts-ignore
+        dispatch(checkUserSession())
+        setClientReady(true); // Ensures client-side rendering
     }, []);
+
 
     const fetchUserData = async () => {
         const token = Cookies.get('token');
@@ -53,11 +55,6 @@ const ProfilePage: React.FC = () => {
             console.error('Error fetching profile data:', error);
         }
     };
-
-
-    useEffect(() => {
-        setClientReady(true); // Ensures client-side rendering
-    }, [dispatch]);
 
 
     // Fetch user profile and last 5 generated recipes

@@ -27,7 +27,8 @@ const ProfilePage: React.FC = () => {
     const [newRecipe, setNewRecipe] = useState<Recipe>({ id: 0, name: '', ingredients: '', notes: '' });
 
     useEffect(() => {
-        checkUserSession()
+        // @ts-ignore
+        dispatch(checkUserSession())
     }, []);
 
     useEffect(() => {

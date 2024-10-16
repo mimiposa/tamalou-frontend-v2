@@ -19,7 +19,7 @@ const Register: React.FC = () => {
     const { loading } = useSelector((state: RootState) => state?.auth || {}); // Use Redux state for auth
 
     useEffect(() => {
-        checkUserSession()
+        dispatch(checkUserSession())
     }, []);
 
     const handleRegister = async (e: FormEvent<HTMLFormElement>) => {

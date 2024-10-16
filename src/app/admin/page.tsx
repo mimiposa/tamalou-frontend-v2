@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
+import {AppDispatch, RootState} from "../../redux/store";
 import {checkUserSession} from "../../redux/slices/authSlice";
 
 interface Recipe {
@@ -38,19 +38,14 @@ const AdminPanel: React.FC = () => {
         instructions: '',
         warningMessage: '',
     });
+    const dispatch = useDispatch<AppDispatch>();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const { user, loading } = useSelector((state: RootState) => state?.auth || {}); // Redux for user state
-
     const { t } = useTranslation();
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
     const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
-
     const [clientReady, setClientReady] = useState(false);
-
-    useEffect(() => {
-        checkUserSession()
-    }, []);
 
     const fetchRecipes = async () => {
         try {
@@ -65,15 +60,15 @@ const AdminPanel: React.FC = () => {
     };
 
     useEffect(() => {
+        dispatch(checkUserSession())
         fetchRecipes();
         setClientReady(true); // Ensures client-side rendering
     }, []);
 
 
-
-    if (loading) {
+    /*if (loading) {
         return <p>Loading...</p>;
-    }
+    }*/
 
     if (!clientReady) return null; // Avoid mismatches between server and client
 

@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 import DOMPurify from 'dompurify';
 import logo from '../../../../public/assets/tamalou-logo.png';
-import {RootState} from "../../../redux/store";
+import {AppDispatch, RootState} from "../../../redux/store";
 import {checkUserSession} from "../../../redux/slices/authSlice";
 
 // Define types for recipe and user
@@ -20,6 +20,7 @@ interface Recipe {
 }
 
 const CreateRecipe: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const [symptomsValue, setSymptoms] = useState('');
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [error, setError] = useState('');
@@ -27,7 +28,7 @@ const CreateRecipe: React.FC = () => {
     const { isClear } = useSelector((state: RootState) => state?.recipe || {}); // Redux for recipe state
 
     useEffect(() => {
-        checkUserSession()
+        dispatch(checkUserSession())
     }, []);
 
 
