@@ -45,7 +45,7 @@ const Register: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-dvh md:p-10">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
+            <div className="w-full max-w-md bg-white rounded-lg">
                 <h1 className="text-2xl font-bold mb-6 text-center">Create Your Account</h1>
                 <form onSubmit={handleRegister} className="space-y-4">
                     <input
@@ -74,7 +74,7 @@ const Register: React.FC = () => {
                     />
                     <button
                         type="submit"
-                        className="w-full bg-black text-white px-6 py-2 rounded-full shadow-md hover:bg-opacity-95 transition duration-200"
+                        className="w-full bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a]"
                     >
                         {loading ? 'Registering...' : 'Register'}
                     </button>

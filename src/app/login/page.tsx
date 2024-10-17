@@ -65,7 +65,7 @@ const Login: React.FC = () => {
                             />
                             <button
                                 type="submit"
-                                className="w-full bg-gray-200 text-black px-6 py-2 rounded-full shadow-md border-2 hover:text-white hover:bg-black transition duration-200">
+                                className="bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a] w-full">
                                 Login
                             </button>
                         </form>

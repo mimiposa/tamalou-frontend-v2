@@ -46,7 +46,7 @@ export const Homepage: React.FC = () => {
 
                                     <Link
                                         href="/profile"
-                                        className="text-md bg-gray-800 text-white px-4 py-2 rounded-lg">
+                                        className="bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a]">
                                         Profile Settings
                                     </Link>
                                 </div>
@@ -70,7 +70,7 @@ export const Homepage: React.FC = () => {
 
                                     <Link
                                         href="/recipes/generate"
-                                        className="text-md bg-gray-800 text-white px-4 py-2 rounded-lg">
+                                        className="bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a]">
                                         Generate Recipe
                                     </Link>
 
@@ -88,7 +88,7 @@ export const Homepage: React.FC = () => {
                                 </div>
                                 <div className="flex justify-center items-center mt-3">
                                     <button
-                                        className="text-md bg-gray-800 text-white px-4 py-2 rounded-lg">View Recipes</button>
+                                        className="bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a]">View Recipes</button>
                                 </div>
                             </div>
                         </div>

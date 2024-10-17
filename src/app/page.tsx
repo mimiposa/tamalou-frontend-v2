@@ -28,12 +28,12 @@ const Home: FC = () => {
                         <div className="flex gap-4">
                         <Link
                         href="/register"
-                        className="bg-black text-white px-6 py-2 rounded-full shadow-md hover:bg-opacity-95 transition duration-200">
+                        className="bg-[#A3B18A] text-white px-6 py-2 rounded-full transition duration-300 hover:bg-[#7d936a]">
                         Register
                         </Link>
                             <Link
                                 href="/login"
-                                className="text-black px-6 py-2 rounded-full shadow-md border-2 hover:bg-gray-200 transition duration-200">
+                                className="text-black px-6 py-2 rounded-full hover:bg-[#7d936a] hover:text-white transition duration-300 shadow-md">
                                 Login
                             </Link>
                         </div>

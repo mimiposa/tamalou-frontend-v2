@@ -70,7 +70,7 @@ const Sidebar: React.FC = () => {
             {/* Sidebar */}
             {user && <aside
                 ref={sidebarRef}
-                className={`fixed inset-y-0 left-0 transform bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto transition-transform duration-200 ease-in-out z-10 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-64`}
+                className={`fixed inset-y-0 left-0 transform bg-gray-50 border-r border-gray-100 p-4 overflow-y-auto transition-transform duration-200 ease-in-out z-10 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-64`}
             >
                 <div className="flex flex-col h-full">
                     <h2 className="hidden md:block text-xl font-bold mb-6">Menu</h2>
